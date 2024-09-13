@@ -1,9 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"bancey/infant-activity-tracker-api/routes"
+)
 
 func main() {
-	var myVar = "Hello, world."
-	fmt.Println(myVar)
-
+	routes.Run()
 }
