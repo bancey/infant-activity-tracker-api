@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestGetSubTypes(t *testing.T) {
@@ -22,12 +23,8 @@ func TestGetSubTypes(t *testing.T) {
 				Type: test.activityType,
 			}
 			var got []Activity_SubTypes = activity.getSubTypes()
-			if diff := cmp.Diff(test.validSubTypes, got); diff != "" {
-				t.Logf("Retrieved sub types: %q, are not equal", got)
-				t.Fatalf("Activity Type (%q) valid sub types (%q) and expected valid sub types (%q) do not match.", test.activityType, got, test.validSubTypes)
-			} else {
-				t.Logf("Retrieved sub types: %q, are equal", got)
-			}
+			var diff = cmp.Diff(test.validSubTypes, got)
+			assert.Equal(t, "", diff)
 		})
 	}
 }
