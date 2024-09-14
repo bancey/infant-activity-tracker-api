@@ -22,4 +22,13 @@ jobs:
       run: go build -v ./...
 
     - name: Test
-      run: go test -v ./...
+      run: |
+        go install github.com/jstemmer/go-junit-report@latest
+        go test -v ./... | go-junit-report -set-exit-code > report.xml
+    
+    - name: Test Summary
+      uses: test-summary/action@v1
+      with:
+        paths: |
+          report.xml            
+      if: always()
